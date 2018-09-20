@@ -248,7 +248,7 @@ function comunicaSimulink()
 %close_system('Nombre de la guide');//Cierra el mdl
 
 
-function soni
+function sonido()
 clear all
 close all
 
