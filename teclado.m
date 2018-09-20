@@ -77,7 +77,8 @@ switch handles.counter
     case 4
         fprintf('\n 3 \n');
         handles.counter = 0;
-end
+
+end 
 
 %-----------------------------------------------------------------------------------------------------------------------
 function bt4_Callback(hObject, eventdata, handles)
@@ -139,7 +140,9 @@ switch handles.counter
     case 4
         fprintf('\n 6 \n');
         handles.counter = 0;
+
 end
+
 %-----------------------------------------------------------------------------------------------------------------------
 function bt7_Callback(hObject, eventdata, handles)
 %fprintf('\n 7 \n')
@@ -163,6 +166,7 @@ switch handles.counter
         fprintf('\n 7 \n');
         handles.counter = 0;
 end
+
 %-----------------------------------------------------------------------------------------------------------------------
 function bt8_Callback(hObject, eventdata, handles)
 %fprintf('\n 8 \n')
@@ -228,9 +232,11 @@ return;
 end
 delete(hObject); 
 
+
 % --- Executes on button press in informacion.
 %function msg_Callback(hObject, eventdata, handles)
 %msgbox({'Marcacion de numeros telefonicos por:         .','Ingrid Carmona Diaz','Daniela Diaz Bejarano','Marlon Marin Barco','Alejandro Oyuela Bolanos'},'Bienvenido');
+
 %-----------------------------------------------------------------------------------------------------------------------
 
 function comunicaSimulink()
@@ -242,20 +248,18 @@ function comunicaSimulink()
 %close_system('Nombre de la guide');//Cierra el mdl
 
 
-
-
-
+function soni
 clear all
 close all
 
 %Teclado 
 keypad = ['1','2','3','4','5','6','7','8','9','*','#']
 
-%DTMF low frequency
-fLow = [697 770 852 941] %22.304 24.64 27.264 30.112
+%DTMF low frequency rows
+Frow = [697 770 852 941] %22.304 24.64 27.264 30.112
 
-%DTMF high frequency 
-FHigh = [1209 1336 1477 ] %38.688 42.752 47.264 52.265
+%DTMF high frequency  colu
+Fc = [1209 1336 1477 ] %38.688 42.752 47.264 52.265
 
 %Sampling rate
 Fs = 32768
@@ -272,12 +276,12 @@ Index1 = 0;
 Index2 = 0;
 
 %Generate DTMF tone
-lo = 0.999969*cos(2*pi*697*(0:N-1)/Fs);
-hi = 0.999969*cos(2*pi*1209*(0:N-1)/Fs);
-data = lo + hi;
+lo = 0.999969*sin(2*pi*Frow*(0:N-1)/Fs);
+hi = 0.999969*sin(2*pi*Fc*(0:N-1)/Fs);
+data = (lo + hi)/2;
 
 %Play DTMF signal
-soundsc(data);
+soundsc(data, Fs);
 
 %Fft of DTMF tone
 fft_data = fft(data);
@@ -295,10 +299,10 @@ index_low = k(1);
 index_high = k(2);
 
 %Finds low frequency foe DTMF signal 
-for  n= 1:length(FHigh)
+for  n= 1:length(Fc)
     detected_tone = (index_low - 0.5)*Fs/N;
     
-    if((detected_tone > FLow(n)) && (detected_tone < FLow(n) + 40))
+    if((detected_tone > Frow(n)) && (detected_tone < Frow(n) + 40))
         Power1 = detected_tone;
         Index1 = n;
         
@@ -309,10 +313,10 @@ end
 
     
 %Finds high frequency foe DTMF signal 
-for  n= 1:length(FHigh)
+for  n= 1:length(Fc)
     detected_tone = (index_high - 0.5)*Fs/N;
     
-    if((detected_tone > FHigh(n)) && (detected_tone < FHigh(n) + 40))
+    if((detected_tone >fHigh(n)) && (detected_tone < fHigh(n) + 40))
         Power2 = detected_tone;
         Index2 = n;
         
@@ -321,5 +325,5 @@ for  n= 1:length(FHigh)
     end
 end
 
-fprintf('El primer tono es %Hz\n', FLow(index1), FHigh(Index2));
+fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
 fprintf('El teclado es presionado si: %s\n', keypad(Index1,Index2));
