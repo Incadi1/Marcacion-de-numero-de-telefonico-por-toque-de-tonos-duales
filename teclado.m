@@ -77,6 +77,7 @@ switch handles.counter
     case 4
         fprintf('\n 3 \n');
         handles.counter = 0;
+end
 
 %-----------------------------------------------------------------------------------------------------------------------
 function bt4_Callback(hObject, eventdata, handles)
@@ -97,6 +98,7 @@ switch handles.counter
     case 4
         fprintf('\n 4 \n');
         handles.counter = 0;
+end
 
 %-----------------------------------------------------------------------------------------------------------------------.
 function bt5_Callback(hObject, eventdata, handles)
@@ -117,7 +119,7 @@ switch handles.counter
     case 4
         fprintf('\n 5 \n');
         handles.counter = 0;
-
+end
 %-----------------------------------------------------------------------------------------------------------------------
 function bt6_Callback(hObject, eventdata, handles)
 %fprintf('\n b6 \n')
@@ -137,7 +139,7 @@ switch handles.counter
     case 4
         fprintf('\n 6 \n');
         handles.counter = 0;
-
+end
 %-----------------------------------------------------------------------------------------------------------------------
 function bt7_Callback(hObject, eventdata, handles)
 %fprintf('\n 7 \n')
@@ -160,7 +162,7 @@ switch handles.counter
     case 5
         fprintf('\n 7 \n');
         handles.counter = 0;
-
+end
 %-----------------------------------------------------------------------------------------------------------------------
 function bt8_Callback(hObject, eventdata, handles)
 %fprintf('\n 8 \n')
@@ -180,7 +182,7 @@ switch handles.counter
     case 4
         fprintf('\n 8 \n');
         handles.counter = 0;
-
+end
 
 %-----------------------------------------------------------------------------------------------------------------------
 function bt9_Callback(hObject, eventdata, handles)
@@ -204,7 +206,7 @@ switch handles.counter
     case 5
         fprintf('\n 9 \n');
         handles.counter = 0;
-
+end
 
 %-----------------------------------------------------------------------------------------------------------------------
 function btAste_Callback(hObject, eventdata, handles)
@@ -231,7 +233,7 @@ delete(hObject);
 %msgbox({'Marcacion de numeros telefonicos por:         .','Ingrid Carmona Diaz','Daniela Diaz Bejarano','Marlon Marin Barco','Alejandro Oyuela Bolanos'},'Bienvenido');
 %-----------------------------------------------------------------------------------------------------------------------
 
-
+function comunicaSimulink()
 %Codigo para comunicar simulink con matlab
 %load_system('Nombre de la guide')
 %Carga el modelo mdl
