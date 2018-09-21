@@ -1,3 +1,4 @@
+
 function varargout = teclado(varargin)
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
@@ -39,23 +40,23 @@ function bt1_Callback(hObject, eventdata, handles)
 %-----------------------------------------------------------------------------------------------------------------------
 function bt2_Callback(hObject, eventdata, handles)
 %fprintf('\n 2')
-
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
+fprintf("cont: " + handles.counter)
+sonido();
 
-switch handles.counter
+switch mod(handles.counter, 4)
     case 1
         fprintf('\n a \n');
-        handles.counter = 0;
+       
     case 2
         fprintf('\n b \n');
-        handles.counter = 0;
+     
     case 3
         fprintf('\n c \n');
-       handles.counter = 0;
-    case 4
+     
+    case 0
         fprintf('\n 2 \n');
-        handles.counter = 0;
 end
 
 %-----------------------------------------------------------------------------------------------------------------------
@@ -64,19 +65,15 @@ function bt3_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,4)
     case 1
         fprintf('\n d \n');
-        handles.counter = 0;
     case 2
         fprintf('\n e \n');
-        handles.counter = 0;
     case 3
         fprintf('\n f \n');
-       handles.counter = 0;
-    case 4
+    case 0
         fprintf('\n 3 \n');
-        handles.counter = 0;
 
 end 
 
@@ -86,19 +83,15 @@ function bt4_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,4)
     case 1
         fprintf('\n g \n');
-        handles.counter = 0;
     case 2
         fprintf('\n h \n');
-        handles.counter = 0;
     case 3
         fprintf('\n i \n');
-       handles.counter = 0;
-    case 4
+    case 0
         fprintf('\n 4 \n');
-        handles.counter = 0;
 end
 
 %-----------------------------------------------------------------------------------------------------------------------.
@@ -107,27 +100,24 @@ function bt5_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,4)
     case 1
         fprintf('\n j \n');
-        handles.counter = 0;
     case 2
         fprintf('\n k \n');
-        handles.counter = 0;
     case 3
         fprintf('\n l \n');
-       handles.counter = 0;
-    case 4
+    case 0
         fprintf('\n 5 \n');
-        handles.counter = 0;
 end
+
 %-----------------------------------------------------------------------------------------------------------------------
 function bt6_Callback(hObject, eventdata, handles)
 %fprintf('\n b6 \n')
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,4)
     case 1
         fprintf('\n m \n');
         handles.counter = 0;
@@ -137,7 +127,7 @@ switch handles.counter
     case 3
         fprintf('\n o \n');
        handles.counter = 0;
-    case 4
+    case 0
         fprintf('\n 6 \n');
         handles.counter = 0;
 
@@ -149,7 +139,7 @@ function bt7_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,5)
     case 1
         fprintf('\n p \n');
         handles.counter = 0;
@@ -162,7 +152,7 @@ switch handles.counter
         case 4
         fprintf('\n s \n');
        handles.counter = 0;
-    case 5
+    case 0
         fprintf('\n 7 \n');
         handles.counter = 0;
 end
@@ -173,7 +163,7 @@ function bt8_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,4)
     case 1
         fprintf('\n t \n');
         handles.counter = 0;
@@ -183,7 +173,7 @@ switch handles.counter
     case 3
         fprintf('\n v \n');
        handles.counter = 0;
-    case 4
+    case 0
         fprintf('\n 8 \n');
         handles.counter = 0;
 end
@@ -194,7 +184,7 @@ function bt9_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 
-switch handles.counter
+switch mod(handles.counter,5)
     case 1
         fprintf('\n w \n');
         handles.counter = 0;
@@ -207,7 +197,7 @@ switch handles.counter
      case 4
         fprintf('\n z \n');
        handles.counter = 0;
-    case 5
+    case 0
         fprintf('\n 9 \n');
         handles.counter = 0;
 end
@@ -327,3 +317,5 @@ end
 
 fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
 fprintf('El teclado es presionado si: %s\n', keypad(Index1,Index2));
+
+
