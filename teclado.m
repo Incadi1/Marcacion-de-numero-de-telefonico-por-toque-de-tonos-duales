@@ -41,7 +41,7 @@ function bt1_Callback(hObject, eventdata, handles)
 function bt2_Callback(hObject, eventdata, handles)
 %fprintf('\n 2')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 fprintf("cont: " + handles.counter)
 
 
@@ -51,7 +51,7 @@ switch mod(handles.counter, 4);
         r= 697;
         c = 1209;
 %         suma(r,c)
-         sonido(c);
+         sonido(c,r);
     case 2
         fprintf('\n b \n');
      
@@ -66,7 +66,7 @@ end
 function bt3_Callback(hObject, eventdata, handles)
 %fprintf('\n 3 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,4)
     case 1
@@ -84,7 +84,7 @@ end
 function bt4_Callback(hObject, eventdata, handles)
 %fprintf('\n 4 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,4)
     case 1
@@ -101,7 +101,7 @@ end
 function bt5_Callback(hObject, eventdata, handles)
 %fprintf('\n 5 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,4)
     case 1
@@ -118,7 +118,7 @@ end
 function bt6_Callback(hObject, eventdata, handles)
 %fprintf('\n b6 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,4)
     case 1
@@ -140,7 +140,7 @@ end
 function bt7_Callback(hObject, eventdata, handles)
 %fprintf('\n 7 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,5)
     case 1
@@ -164,7 +164,7 @@ end
 function bt8_Callback(hObject, eventdata, handles)
 %fprintf('\n 8 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,4)
     case 1
@@ -185,7 +185,7 @@ end
 function bt9_Callback(hObject, eventdata, handles)
 %fprintf('\n 9 \n')
 handles.counter = handles.counter + 1;
-guidata(hObject, handles)
+guidata(hObject, handles);
 
 switch mod(handles.counter,5)
     case 1
@@ -339,29 +339,77 @@ function btMic_ButtonDownFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-function sonido(fC)
-clear; %limpiamos listado de variables usadas
-clc;   %limpiamos pantalla
+function sonido(fC, fR)
 
 fs=32768; %definimos variable frecuencia de sampleo
-fC; %definimos variable frecuecnia de nuestro sonido
- 
+ fC; %definimos variable frecuecnia de columna nuestro sonido
+ fR;
+ %Samples
+N = 256;
 duracion_segundos=0.2; %definimos la duracion de nuestro sonido
- 
-b=fC*2*pi; %definimos variable b a utilizar en nuesta funcion a·sin(bt+c)
-%a=1; % a debe ser 1 para que la funcion no se distorcione al reproducirse
-%c=0;
- 
-t=0:1/44100:duracion_segundos;
- 
-x=sin(b*t);
- 
-soundsc(x,fs); %reproducir el sonido
+%Index of signal(row(1) and columns (2))
+Index1 = 0;
+Index2 = 0;
+
+%Generate DTMF tone
+lo = sin(2*pi*fR*(0:N-1)/fs);
+hi = sin(2*pi*fC*(0:N-1)/fs);
+data = (lo + hi)/2;
+
+
+
+t=0:1/fs:duracion_segundos;
+
+soundsc(data,fs); %reproducir el sonido
+% %Fft of DTMF tone
+% fft_data = fft(data);
+%     
+% %Magnitude of goertzel (DFT) value
+% mag_data = abs(fft_data);
+% 
+% %Graphs the magnitude of high and low DTMF signal
+% %Stem(mag_data)
+% %Xlabel('Samples'); YLabel('Magnitude'); Tittle('DFT Magnitude');
+% 
+% %Find index of low and high DTMF tone
+% k = find(mag_data > 80,2);
+% index_low = k(1);
+% index_high = k(2);
+% 
+% %Finds low frequency foe DTMF signal 
+% for  n= 1:length(Fc)
+%     detected_tone = (index_low - 0.5)*Fs/N;
+%     
+%     if((detected_tone > Frow(n)) && (detected_tone < Frow(n) + 40))
+%         Power1 = detected_tone;
+%         Index1 = n;
+%         
+%     else
+%         Power1 = Index1;
+%     end
+% end
+% 
+%     
+% %Finds high frequency foe DTMF signal 
+% for  n= 1:length(Fc)
+%     detected_tone = (index_high - 0.5)*Fs/N;
+%     
+%     if((detected_tone >fHigh(n)) && (detected_tone < fHigh(n) + 40))
+%         Power2 = detected_tone;
+%         Index2 = n;
+%         
+%     else
+%         Power2 = Power2;
+%     end
+% end
+% 
+% fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
+% 
  
 % para hacer un grafico de la onda de sonido
 sub_t=(1:100); % tomamos los 100 primeros puntos del vector t
  
-sub_x=x(1:100); % tomamos los 100 primeros puntos del vector x
+sub_x=data(1:100); % tomamos los 100 primeros puntos del vector x
  
 stem(sub_t,sub_x); %graficamos
  
