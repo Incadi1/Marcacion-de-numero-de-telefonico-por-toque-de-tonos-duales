@@ -319,3 +319,101 @@ fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
 fprintf('El teclado es presionado si: %s\n', keypad(Index1,Index2));
 
 
+
+
+
+function tbTextInput_Callback(hObject, eventdata, handles)
+% hObject    handle to tbTextInput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of tbTextInput as text
+%        str2double(get(hObject,'String')) returns contents of tbTextInput as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function tbTextInput_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to tbTextInput (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function txTextIng_Callback(hObject, eventdata, handles)
+% hObject    handle to txTextIng (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of txTextIng as text
+%        str2double(get(hObject,'String')) returns contents of txTextIng as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function txTextIng_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to txTextIng (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function txRutaAudioInp_Callback(hObject, eventdata, handles)
+% hObject    handle to txRutaAudioInp (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of txRutaAudioInp as text
+%        str2double(get(hObject,'String')) returns contents of txRutaAudioInp as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function txRutaAudioInp_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to txRutaAudioInp (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in btExaminar.
+function btExaminar_Callback(hObject, eventdata, handles)
+% hObject    handle to btExaminar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in btSubir.
+function btSubir_Callback(hObject, eventdata, handles)
+% hObject    handle to btSubir (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in btMic.
+function btMic_Callback(hObject, eventdata, handles)
+% hObject    handle to btMic (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over btMic.
+function btMic_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to btMic (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
