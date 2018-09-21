@@ -28,9 +28,28 @@ guidata(hObject, handles) %Guardas el handle
 handles.A=[]; %Creas el handle de A en forma de vector vacío para concatenarle horizontalmente los valores del contador
 guidata(hObject, handles)
 
-%-----------------------------------------------------------------------------------------------------------------------
+%------ -----------------------------------------------------------------------------------------------------------------
 function varargout = teclado_OutputFcn(hObject, eventdata, handles) 
 varargout{1} = handles.output;
+ 
+function BotonesTeclado(s)
+%- fila |Colum
+% j = [1 2 3];
+% k = [1 2 3 4];
+
+switch s
+    case '*', k 
+ 
+% switch s
+% case '*', k = 4; j = 1;
+% case '0', k = 4; j = 2;
+% case '#', k = 4; j = 3;
+% otherwise,
+% d = s-'0';
+% j = mod(d-1,3)+1;
+% k = (d-j)/3+1;
+% end
+
 
 %-----------------------------------------------------------------------------------------------------------------------
 function bt1_Callback(hObject, eventdata, handles)
@@ -225,6 +244,9 @@ fprintf('\n 0 \n')
 function btNum_Callback(hObject, eventdata, handles)
 fprintf('\n # \n')
 
+function s()
+
+end
 %-----------------------------------------------------------------------------------------------------------------------
 function  figure1_CloseRequestFcn(hObject, eventdata, handles)
 opc=questdlg('¿Desea salir del programa?','SALIR','Si','No','No'); 
@@ -249,7 +271,7 @@ delete(hObject);
 %close_system('Nombre de la guide');//Cierra el mdl
 
 
-function soni
+function sonido()
 clear all
 close all
 
