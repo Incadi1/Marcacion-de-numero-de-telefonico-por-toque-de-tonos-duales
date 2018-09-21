@@ -43,12 +43,15 @@ function bt2_Callback(hObject, eventdata, handles)
 handles.counter = handles.counter + 1;
 guidata(hObject, handles)
 fprintf("cont: " + handles.counter)
-sonido();
 
-switch mod(handles.counter, 4)
+
+switch mod(handles.counter, 4);
     case 1
         fprintf('\n a \n');
-       
+        r= 697;
+        c = 1209;
+%         suma(r,c)
+         sonido(c);
     case 2
         fprintf('\n b \n');
      
@@ -238,88 +241,6 @@ function comunicaSimulink()
 %close_system('Nombre de la guide');//Cierra el mdl
 
 
-function sonido()
-clear all
-close all
-
-%Teclado 
-keypad = ['1','2','3','4','5','6','7','8','9','*','#']
-
-%DTMF low frequency rows
-Frow = [697 770 852 941] %22.304 24.64 27.264 30.112
-
-%DTMF high frequency  colu
-Fc = [1209 1336 1477 ] %38.688 42.752 47.264 52.265
-
-%Sampling rate
-Fs = 32768
-
-%Samples
-N = 256;
-
-%Energy of signal (low(1) and high (2))
-Power1 = 0;
-Power2 = 0;
-
-%Index of signal(low(1) and high (2))
-Index1 = 0;
-Index2 = 0;
-
-%Generate DTMF tone
-lo = 0.999969*sin(2*pi*Frow*(0:N-1)/Fs);
-hi = 0.999969*sin(2*pi*Fc*(0:N-1)/Fs);
-data = (lo + hi)/2;
-
-%Play DTMF signal
-soundsc(data, Fs);
-
-%Fft of DTMF tone
-fft_data = fft(data);
-    
-%Magnitude of goertzel (DFT) value
-mag_data = abs(fft_data);
-
-%Graphs the magnitude of high and low DTMF signal
-%Stem(mag_data)
-%Xlabel('Samples'); YLabel('Magnitude'); Tittle('DFT Magnitude');
-
-%Find index of low and high DTMF tone
-k = find(mag_data > 80,2);
-index_low = k(1);
-index_high = k(2);
-
-%Finds low frequency foe DTMF signal 
-for  n= 1:length(Fc)
-    detected_tone = (index_low - 0.5)*Fs/N;
-    
-    if((detected_tone > Frow(n)) && (detected_tone < Frow(n) + 40))
-        Power1 = detected_tone;
-        Index1 = n;
-        
-    else
-        Power1 = Index1;
-    end
-end
-
-    
-%Finds high frequency foe DTMF signal 
-for  n= 1:length(Fc)
-    detected_tone = (index_high - 0.5)*Fs/N;
-    
-    if((detected_tone >fHigh(n)) && (detected_tone < fHigh(n) + 40))
-        Power2 = detected_tone;
-        Index2 = n;
-        
-    else
-        Power2 = Power2;
-    end
-end
-
-fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
-fprintf('El teclado es presionado si: %s\n', keypad(Index1,Index2));
-
-
-
 
 
 function tbTextInput_Callback(hObject, eventdata, handles)
@@ -417,3 +338,116 @@ function btMic_ButtonDownFcn(hObject, eventdata, handles)
 % hObject    handle to btMic (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+function sonido(fC)
+clear; %limpiamos listado de variables usadas
+clc;   %limpiamos pantalla
+
+fs=32768; %definimos variable frecuencia de sampleo
+fC; %definimos variable frecuecnia de nuestro sonido
+ 
+duracion_segundos=0.2; %definimos la duracion de nuestro sonido
+ 
+b=fC*2*pi; %definimos variable b a utilizar en nuesta funcion a·sin(bt+c)
+%a=1; % a debe ser 1 para que la funcion no se distorcione al reproducirse
+%c=0;
+ 
+t=0:1/44100:duracion_segundos;
+ 
+x=sin(b*t);
+ 
+soundsc(x,fs); %reproducir el sonido
+ 
+% para hacer un grafico de la onda de sonido
+sub_t=(1:100); % tomamos los 100 primeros puntos del vector t
+ 
+sub_x=x(1:100); % tomamos los 100 primeros puntos del vector x
+ 
+stem(sub_t,sub_x); %graficamos
+ 
+%wavwrite(x,fs,'sonido_1'); %guardamos el sonido en .wav
+% clear all
+% close all
+% 
+% %Teclado 
+% % keypad = ['1','2','3','4','5','6','7','8','9','*','#']
+% 
+% %DTMF rows frequency 
+% %Frow = [697 770 852 941] %22.304 24.64 27.264 30.112
+% Frow =row;
+% %DTMF Columns frequency
+% %Fc = [1209 1336 1477 ] %38.688 42.752 47.264 52.265
+% Fc = colum;
+% %Sampling rate
+% Fs = 32768
+% 
+% %Samples
+% N = 256;
+% 
+% %Energy of signal (low(1) and high (2))
+% %Power1 = 0;
+% %Power2 = 0;
+% 
+% %Index of signal(row(1) and columns (2))
+% Index1 = 0;
+% Index2 = 0;
+% 
+% %Generate DTMF tone
+% lo = 0.999969*sin(2*pi*Frow*(0:N-1)/Fs);
+% hi = 0.999969*sin(2*pi*Fc*(0:N-1)/Fs);
+% data = (lo + hi)/2;
+% 
+% %Play DTMF signal
+% soundsc(data, Fs);
+% 
+% %Fft of DTMF tone
+% fft_data = fft(data);
+%     
+% %Magnitude of goertzel (DFT) value
+% mag_data = abs(fft_data);
+% 
+% %Graphs the magnitude of high and low DTMF signal
+% %Stem(mag_data)
+% %Xlabel('Samples'); YLabel('Magnitude'); Tittle('DFT Magnitude');
+% 
+% %Find index of low and high DTMF tone
+% k = find(mag_data > 80,2);
+% index_low = k(1);
+% index_high = k(2);
+% 
+% %Finds low frequency foe DTMF signal 
+% for  n= 1:length(Fc)
+%     detected_tone = (index_low - 0.5)*Fs/N;
+%     
+%     if((detected_tone > Frow(n)) && (detected_tone < Frow(n) + 40))
+%         Power1 = detected_tone;
+%         Index1 = n;
+%         
+%     else
+%         Power1 = Index1;
+%     end
+% end
+% 
+%     
+% %Finds high frequency foe DTMF signal 
+% for  n= 1:length(Fc)
+%     detected_tone = (index_high - 0.5)*Fs/N;
+%     
+%     if((detected_tone >fHigh(n)) && (detected_tone < fHigh(n) + 40))
+%         Power2 = detected_tone;
+%         Index2 = n;
+%         
+%     else
+%         Power2 = Power2;
+%     end
+% end
+% 
+% fprintf('El primer tono es %Hz\n', FLow(index1), Fc(Index2));
+% fprintf('El teclado es presionado si: %s\n', keypad(Index1,Index2));
+
+function [z] = suma (x,y)
+%Esta función suma dos números x e y
+%y devuelve el resultado de la suma en z
+    w =x;
+    z=w+y; %efectúa la suma
+
